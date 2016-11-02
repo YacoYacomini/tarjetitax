@@ -1,6 +1,6 @@
 <?php
 
-namespace Poli\Tarjeta_Colectivo;
+namespace Poli\tarjetitax;
 
 class TarjetaTest extends \PHPUnit_Framework_TestCase {
 
