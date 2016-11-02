@@ -1,6 +1,6 @@
 <?php
 
-namespace Poli\Tarjeta_Colectivo;
+namespace Poli\tarjetitax;
 
 abstract class Transporte {
 	protected $id,$costo,$tipo,$costotrans;
