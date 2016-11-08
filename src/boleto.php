@@ -1,6 +1,6 @@
 <?php
 
-namespace Poli\tarjetitax
+namespace Poli\tarjetitax;
 
 class Boleto {
 		protected $viaje,$trasbordo,$tarjeta;
