@@ -9,7 +9,7 @@ class Boleto {
 			$this->tarjeta = $tarjeta;
 		}
 		public function getBoleto(){
-			return "SEMTUR - ".$this->viaje->getTransporte()->getNombreEmpresa()."\n".
+			return "TRANSPORTE PUBLICO ROSARIO ".$this->viaje->getTransporte()->getNombreEmpresa()."\n".
 			$this->viaje->getHorario()." Linea:".$this->viaje->getTransporte()->getId()."\n".$this->tarjeta->getTipo()." $".$this->viaje->getCosto()."\nSaldo: $".$this->tarjeta->saldo();
 		}
 }
