@@ -70,12 +70,6 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 	}
 	//test de boletos
 
-	public function setup(){
-		$this->tarjeta = new Tarjeta();
-		$this->medio = new Medio();
-		$this->A = new Colectivo("112","SEMTUR");
-		$this->B = new Colectivo("144","Rosario Bus");
-	}
 	public function testPlus(){
 		$this->tarjeta->pagar($this->A,"2016/02/1 12:00");
 		$this->assertEquals($this->tarjeta->getBoleto()->getBoleto(),
@@ -117,13 +111,6 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 //test de bicis
 
 		protected $boleto_bicicleta = 12; 
-		protected $tarjeta,$A,$B,$C;
-		public function setup(){
-			$this->tarjeta = new Tarjeta();
-			$this->A = new Colectivo("112","SEMTUR");
-			$this->B = new Colectivo("144","Rosario Bus");
-			$this->C = new Bicicleta("1");
-		}
 		public function testPagarBici(){
 			$this->tarjeta->recargar(50);
 			$this->tarjeta->pagar($this->C,"2016/02/1 12:00");
