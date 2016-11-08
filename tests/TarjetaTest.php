@@ -4,6 +4,8 @@ namespace Poli\tarjetitax;
 
 class TarjetaTest extends \PHPUnit_Framework_TestCase {
 
+	//test tarjetas y bondi
+	
 	protected $tarjeta,$A,$B;
 	public function setup(){
 		$this->tarjeta = new Tarjeta();
@@ -66,26 +68,13 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 		$this->medio->pagar($this->B,"2016/02/1 12:02");
 		$this->assertEquals($this->medio->saldo(),14.68, "El saldo de la tarjeta deberia ser de $14.68 por el trasbordo");
 	}
+	//test de boletos
 
-	public function testPagarBici(){
-		$this->tarjeta->recargar(30);
-		$this->tarjeta->pagar($this->C,"2016/02/1 12:00");
-		$this->assertEquals($this->tarjeta->saldo(),18, "El saldo de la tarjeta deberia ser de $18");
-		$this->tarjeta->pagar($this->C,"2016/02/1 15:00");
-		$this->assertEquals($this->tarjeta->saldo(),18, "El saldo de la tarjeta deberia ser de $18");
-		$this->tarjeta->pagar($this->C,"2016/02/3 12:00");
-		$this->assertEquals($this->tarjeta->saldo(),6, "El saldo de la tarjeta deberia ser de $6");
-	}
-}
-
-//Test De Boletos
-
-class BoletoTest extends \PHPUnit_Framework_TestCase {
 	public function setup(){
 		$this->tarjeta = new Tarjeta();
 		$this->medio = new Medio();
-		$this->A = new Colectivo("K","SEMTUR");
-		$this->B = new Colectivo("145","Rosario Bus");
+		$this->A = new Colectivo("112","SEMTUR");
+		$this->B = new Colectivo("144","Rosario Bus");
 	}
 	public function testPlus(){
 		$this->tarjeta->pagar($this->A,"2016/02/1 12:00");
@@ -124,5 +113,36 @@ class BoletoTest extends \PHPUnit_Framework_TestCase {
 		$this->assertEquals($this->tarjeta->getBoleto()->getBoleto(),
 			"SEMTUR - \n2016/02/1 12:00 Linea:112\nNORMAL $8\nSaldo: $0"," ");
 	}
+
+//test de bicis
+
+		protected $boleto_bicicleta = 12; 
+		protected $tarjeta,$A,$B,$C;
+		public function setup(){
+			$this->tarjeta = new Tarjeta();
+			$this->A = new Colectivo("112","SEMTUR");
+			$this->B = new Colectivo("144","Rosario Bus");
+			$this->C = new Bicicleta("1");
+		}
+		public function testPagarBici(){
+			$this->tarjeta->recargar(50);
+			$this->tarjeta->pagar($this->C,"2016/02/1 12:00");
+			$this->assertEquals($this->tarjeta->saldo(),50-$this->boleto_bicicleta, "Saldo deberia ser $".(50-$this->boleto_bicicleta));	
+		}
+		public function testPagarDia(){
+			$this->tarjeta->recargar(30);
+			$this->tarjeta->pagar($this->C,"2016/02/1 12:00");
+			$this->tarjeta->pagar($this->C,"2016/02/1 15:00"); 
+			$this->assertEquals($this->tarjeta->saldo(),30-$this->boleto_bicicleta, "Saldo deberia ser $".(30-$this->boleto_bicicleta));
+			$this->tarjeta->pagar($this->C,"2016/02/3 12:00"); 
+			$this->assertEquals($this->tarjeta->saldo(),30-2*$this->boleto_bicicleta, "Saldo deberia ser $".(30-2*$this->boleto_bicicleta));
+		}
+		public function testPagarPlus(){
+			$this->tarjeta->recargar(2.63);
+			$this->tarjeta->pagar($this->C,"2016/02/1 12:00"); 
+			$this->assertEquals($this->tarjeta->pagar($this->C,"2016/04/1 12:00"),1, "Deberia poder pagar"); 
+			$this->assertEquals($this->tarjeta->saldo(),2.63, "Saldo deberia ser $2.63");
+		}
+		
 }
 ?>
