@@ -21,8 +21,13 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 		$this->tarjeta->recargar(250);
 		$this->assertEquals($this->tarjeta->saldo(), 250, "Cuando cargo 250 deberia tener finalmente 250");
 	}
+	public function testTarjeta600()
+	{
+		$this->tarjeta->recargar(600);
+		$this->assertEquals($this->tarjeta->saldo(), 720, "Cuando cargo 600 deberia tener finalmente 740");
+	}
 
-	public function testPagarColectivo1(){
+	public function testPagarColectivo(){
 		$this->tarjeta->recargar(20);
 		$this->medio->recargar(20);
 		$this->tarjeta->pagar($this->A,"2016/26/9 12:00");
@@ -31,6 +36,13 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 		$this->medio->pagar($this->A,"2016/26/9 12:00");
 		$this->medio->pagar($this->A,"2016/26/9 12:02");
 		$this->assertEquals($this->medio->saldo(),12, "El saldo de la tarjeta deberia ser de $12 ya que uso medio boleto");
+	}
+	
+	public function testNoSaldo(){
+		$this->tarjeta->recargar(2.63);
+		$this->tarjeta->pagar($this->C,"2016/02/1 12:00");
+		$this->tarjeta->pagar($this->C,"2016/04/1 12:00"); 
+		$this->assertEquals($this->tarjeta->pagar($this->C,"2016/06/1 12:00"),0,"No deberia poder pagar");
 	}
 
 	public function testPagarColectivosDistintos(){
