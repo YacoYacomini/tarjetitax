@@ -6,7 +6,7 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 
 	//test tarjetas y bondi
 	
-	protected $tarjeta,$A,$B;
+	protected $tarjeta, $A, $B, $c;
 	public function setup(){
 		$this->tarjeta = new Tarjeta();
 		$this->medio = new Medio();
