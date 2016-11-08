@@ -37,7 +37,7 @@ class Tarjeta implements Int_Tarjeta{
 				}
 
 				$this->viajes[$fecha_y_hora] = new Viaje($fecha_y_hora,$transporte,$costo);
-				$this->boleto = new Boleto ($this,$this->viajes[$fecha_y_hora]);
+				$this->boleto = new boleto ($this,$this->viajes[$fecha_y_hora]);
 				$this->ultimafecha = $fecha_y_hora;
 				return 1;
 			} 
