@@ -11,9 +11,8 @@ class Colectivo extends Transporte{
 		$this->costotrans=2.64;
 		$this->tipo=1;
 	}
-
 	public function getNombreEmpresa(){
-		$this->empresa;
+		return $this->empresa;
 	}
 }
 
