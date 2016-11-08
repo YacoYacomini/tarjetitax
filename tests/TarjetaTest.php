@@ -24,7 +24,7 @@ class TarjetaTest extends \PHPUnit_Framework_TestCase {
 	public function testTarjeta600()
 	{
 		$this->tarjeta->recargar(600);
-		$this->assertEquals($this->tarjeta->saldo(), 720, "Cuando cargo 600 deberia tener finalmente 740");
+		$this->assertEquals($this->tarjeta->saldo(), 740, "Cuando cargo 600 deberia tener finalmente 740");
 	}
 
 	public function testPagarColectivo(){
